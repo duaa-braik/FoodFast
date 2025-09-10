@@ -1,10 +1,16 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+from customerService import createNewUser
 
 app = Flask(__name__)
 
 @app.route('/users', methods=['POST'])
 def createUser():
-    return "Create new user"
+    try: 
+        userData = request.get_json()
+        createdUser = createNewUser(userData)
+        return jsonify(createdUser), 201
+    except:
+        return jsonify({"message": "Internal server error"}), 500
 
 
 if __name__ == '__main__':
