@@ -8,8 +8,12 @@ app = Flask(__name__)
 def createUser():
     try: 
         userData = request.get_json()
-        createdUser = createNewUser(userData)
-        return jsonify(createdUser), 201
+        createUserResult = createNewUser(userData)
+
+        if createUserResult['status'] == Result.Fail:
+            return jsonify({"message": createUserResult['message']}), 400
+        
+        return jsonify(createUserResult), 201
     except:
         return jsonify({"message": "Internal server error"}), 500
 

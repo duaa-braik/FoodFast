@@ -7,10 +7,16 @@ from result import Result
 def createNewUser(user) -> dict:
     connection: Connection = getDbConnection()
     try:
+        username = user['username']
+        customer = getCustomerByUsername(username, connection)
+        
+        if customer is not None:
+            return dict(message="Username already exists", status= Result.Fail)
+
         userId: str = str(uuid4())
         createCustomer(user, userId, connection)
         connection.commit()
-        return dict(id=userId, firstName=user['firstName'], lastName=user['lastName'])
+        return dict(id=userId, firstName=user['firstName'], lastName=user['lastName'], status= Result.Success)
     except:
         connection.rollback()
         raise
