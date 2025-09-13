@@ -10,7 +10,7 @@ def createUser():
         userData = request.get_json()
         createUserResult = createNewUser(userData)
 
-        if createUserResult['status'] == Result.Fail:
+        if createUserResult.get('status') == Result.Fail:
             return jsonify({"message": createUserResult['message']}), 400
         
         return jsonify(createUserResult), 201

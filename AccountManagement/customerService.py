@@ -16,7 +16,7 @@ def createNewUser(user) -> dict:
         userId: str = str(uuid4())
         createCustomer(user, userId, connection)
         connection.commit()
-        return dict(id=userId, firstName=user['firstName'], lastName=user['lastName'], status= Result.Success)
+        return dict(id=userId, firstName=user['firstName'], lastName=user['lastName'])
     except:
         connection.rollback()
         raise
