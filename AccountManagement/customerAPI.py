@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from customerService import createNewUser, loginUser
-from loginResult import LoginResult
+from result import Result
 
 app = Flask(__name__)
 
@@ -18,10 +18,10 @@ def login():
     try:
         userCreds = request.get_json()
         result = loginUser(userCreds)
-        
-        if result['status'] == LoginResult.Fail:
+    
+        if result['status'] == Result.Fail:
             return jsonify({"message": result['message']}), 401
-        elif result['status'] == LoginResult.Success:
+        elif result['status'] == Result.Success:
             return jsonify({ "access_token": result['token'] })
     except:
         return jsonify({"message": "Internal server error"}), 500

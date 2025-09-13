@@ -2,7 +2,7 @@ from DB import getDbConnection
 from sqlite3 import Connection
 from uuid import uuid4
 from customerDb import createCustomer, getCustomerByUsername
-from loginResult import LoginResult
+from result import Result
 
 def createNewUser(user) -> dict:
     connection: Connection = getDbConnection()
@@ -21,9 +21,9 @@ def loginUser(userCreds) -> dict:
         customer = getCustomerByUsername(userCreds['username'], connection)
 
         if customer is None or customer['password'] != userCreds['password']:
-            return dict(message="Username or password is incorrect", status= LoginResult.Fail)
+            return dict(message="Username or password is incorrect", status= Result.Fail)
         
-        return dict(token="JWT token", status=LoginResult.Success)
+        return dict(token="JWT token", status=Result.Success)
     except:
         connection.rollback()
         raise
