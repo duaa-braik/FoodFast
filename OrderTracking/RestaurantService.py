@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from CustomersDB.DB import getDbConnection
 from sqlite3 import Connection
 from .ordersDB import updateStatus, getOrderById
+from .RabbitMQ import publishMessageToQueue
 
 app = Flask(__name__)
 
@@ -16,6 +17,9 @@ def changeStatus():
 
         updateStatus(orderDetails, connection)
         connection.commit()
+
+        publishMessageToQueue({ "orderId": orderDetails['orderId'], "status": orderDetails['status'] })
+
         return jsonify({"message": "success"}), 200
     except:
         connection.rollback()
