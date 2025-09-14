@@ -8,3 +8,8 @@ def addNewOrder(orderData, orderId, status, connection: Connection):
 def updateStatus(order, connection: Connection):
     cursor = connection.cursor()
     cursor.execute("update `Order` set status=? where id=?", (order['status'], order['orderId']))
+
+def getOrderById(orderId, connection: Connection):
+    cusror = connection.execute("select status from `Order` where id=?", (orderId,))
+    data = cusror.fetchone()
+    return dict(data) if data else None
