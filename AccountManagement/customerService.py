@@ -1,8 +1,8 @@
-from DB import getDbConnection
+from CustomersDB.DB import getDbConnection
 from sqlite3 import Connection
 from uuid import uuid4
-from customerDb import createCustomer, getCustomerByUsername
-from result import Result
+from .customerDb import createCustomer, getCustomerByUsername
+from .result import Result
 
 def createNewUser(user) -> dict:
     connection: Connection = getDbConnection()

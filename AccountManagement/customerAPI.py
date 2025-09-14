@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-from customerService import createNewUser, loginUser
-from result import Result
+from .customerService import createNewUser, loginUser
+from .result import Result
 
 app = Flask(__name__)
 
