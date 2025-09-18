@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FoodFast Orders</title>
+</head>
+<body>
+  <h1>FoodFast Restaurant</h1>
+
+  <h2>New Orders:</h2>
+  <ul id="orders"></ul>
+
+  <script>
+    const eventSource = new EventSource("http://localhost:8000/stream");
+    eventSource.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      const li = document.createElement("li");
+      li.textContent = data.id;
+      document.getElementById("orders").appendChild(li);
+    };
+  </script>
+</body>
+</html>
