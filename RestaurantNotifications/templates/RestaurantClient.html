@@ -14,7 +14,7 @@
     eventSource.onmessage = function(event) {
       const data = JSON.parse(event.data);
       const li = document.createElement("li");
-      li.textContent = data.id;
+      li.textContent = `Order ID: ${data.id}, Total price: ${data.total}`;
       document.getElementById("orders").appendChild(li);
     };
   </script>

@@ -18,7 +18,7 @@ def createOrder():
         addNewOrder(orderData, orderId, status, connection)
         connection.commit()
 
-        orderData = {"id": orderId, "status": status, "customerId": orderData['customerId']}
+        orderData = {"id": orderId, "status": status, "customerId": orderData['customerId'], "total": orderData['total']}
 
         sendToRestaurantServer(orderData)
 
