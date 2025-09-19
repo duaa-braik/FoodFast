@@ -19,11 +19,11 @@ This feature is built using Request-Response pattern and has 2 main API endpoint
 2. **Users Login API**
     ```
     curl --location 'http://127.0.0.1:3000/users/login' \
---header 'Content-Type: application/json' \
---data '{
-    "username": "duaa-braik55",
-    "password": "123345789"
-}'
+    --header 'Content-Type: application/json' \
+    --data '{
+        "username": "duaa-braik55",
+        "password": "123345789"
+    }'
     ```
 
 ## 2. Order Tracking
