@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from CustomersDB.DB import getDbConnection
+from CustomersDB.DB import getDbConnection, createTablesIfNotExist
 from sqlite3 import Connection
 from uuid import uuid4
 from .ordersDB import addNewOrder
@@ -32,4 +32,5 @@ def sendToRestaurantServer(orderData):
     
 
 if __name__ == '__main__':
+    createTablesIfNotExist()
     app.run(host='0.0.0.0', port=3005, debug=True)

@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from .customerService import createNewUser, loginUser
 from .result import Result
+from CustomersDB.DB import createTablesIfNotExist
 
 app = Flask(__name__)
 
@@ -32,4 +33,5 @@ def login():
 
 
 if __name__ == '__main__':
+    createTablesIfNotExist()
     app.run(host='0.0.0.0', port=3000, debug=True)

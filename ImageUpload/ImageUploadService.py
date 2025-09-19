@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from uuid import uuid4
-from CustomersDB.DB import getDbConnection
+from CustomersDB.DB import getDbConnection, createTablesIfNotExist
 from sqlite3 import Connection
 from .JobsDb import addNewJob, updateJobStatus, getJobById
 import threading
@@ -82,4 +82,5 @@ def startFileProcessing(jobId, fileContent, clientId, fileName, fileSize):
 
 
 if __name__ == '__main__':
+    createTablesIfNotExist()
     app.run(host='0.0.0.0', port=3007, debug=True)

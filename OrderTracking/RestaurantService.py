@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from CustomersDB.DB import getDbConnection
+from CustomersDB.DB import getDbConnection, createTablesIfNotExist
 from sqlite3 import Connection
 from .ordersDB import updateStatus, getOrderById
 from .RabbitMQ import publishMessageToQueue
@@ -32,4 +32,5 @@ def isStatusChanged(orderData, connection: Connection):
     return orderData['status'] != oldStatus
 
 if __name__ == '__main__':
+    createTablesIfNotExist()
     app.run(host='0.0.0.0', port=3006, debug=True)
